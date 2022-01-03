@@ -15,6 +15,30 @@ macro_rules! impl_any_fn_ptr {
                 self as _
             }
         }
+
+        unsafe impl <$($gen),*, R> AnyFnPtr for extern "C" fn($($gen),*) -> R {
+            fn address(self) -> usize {
+                self as _
+            }
+        }
+
+        unsafe impl <$($gen),*, R> AnyFnPtr for unsafe extern "C" fn($($gen),*) -> R {
+            fn address(self) -> usize {
+                self as _
+            }
+        }
+
+        unsafe impl <$($gen),*, R> AnyFnPtr for extern "system" fn($($gen),*) -> R {
+            fn address(self) -> usize {
+                self as _
+            }
+        }
+
+        unsafe impl <$($gen),*, R> AnyFnPtr for unsafe extern "system" fn($($gen),*) -> R {
+            fn address(self) -> usize {
+                self as _
+            }
+        }
     };
 }
 
