@@ -1,0 +1,13 @@
+[package]
+name = "sunshine"
+version = "0.1.0"
+edition = "2021"
+authors = ["sy1ntexx"]
+description = "Hooking library for x86/x64"
+
+[dependencies]
+iced-x86 = "1.15.0"
+cfg-if = "1.0.0"
+
+[dependencies.radon]
+git = "https://github.com/sy1ntexx/radon"
