@@ -27,14 +27,14 @@ impl Jump for RelativeJump {
             if offset > i32::MAX as _ || offset < i32::MIN as _ {
                 return Err(SunshineError::TooFarAway)
             } else {
-                offset
+                offset as i32
             }
 
         } else {
-            dst.offset_from(head.add(Self::SIZE))   
+            dst.offset_from(head.add(Self::SIZE)) as i32
         };
 
-        *(head.add(1) as *mut isize) = offset;
+        *(head.add(1) as *mut i32) = offset;
 
         Ok(())
     }

@@ -6,7 +6,7 @@ pub(crate) struct ProtectionGuard(Ptr, usize, PAGE_PROTECTION_FLAGS);
 impl ProtectionGuard {
     pub fn new(address: Ptr, size: usize, protection: PAGE_PROTECTION_FLAGS) -> crate::Result<Self> {
         let old = radon::internal::virtual_protect(address as _, size, protection)
-            .map_err(|_| SunshineError::ProtectionError)?;
+            .map_err(|_| SunshineError::ProtectionFailed)?;
 
         Ok(Self(address, size, old))
     }

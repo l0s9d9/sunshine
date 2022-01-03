@@ -27,7 +27,7 @@ pub(crate) unsafe fn hook_absolute(p_src: Ptr, p_dst: Ptr, pp_original: Ptr<Ptr>
 
     Ok(Hook::Absolute {
         gateway: gateway as _,
-        p_target: p_src as _,
+        target: p_src as _,
         stolen_size,
     })
 }
