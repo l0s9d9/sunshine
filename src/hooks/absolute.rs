@@ -1,7 +1,7 @@
-use crate::{Ptr, create_gateway, jump::{AbsoluteJump, Jump}};
+use crate::{Ptr, create_gateway, jump::{AbsoluteJump, Jump}, Hook};
 use iced_x86::Decoder;
 
-pub unsafe fn hook_absolute(p_src: Ptr, p_dst: Ptr, pp_original: Ptr<Ptr>) -> crate::Result<()> {
+pub(crate) unsafe fn hook_absolute(p_src: Ptr, p_dst: Ptr, pp_original: Ptr<Ptr>) -> crate::Result<Hook> {
     let mut stolen_size = 0;
 
     let dec = Decoder::new(
@@ -25,5 +25,9 @@ pub unsafe fn hook_absolute(p_src: Ptr, p_dst: Ptr, pp_original: Ptr<Ptr>) -> cr
         *pp_original = gateway;
     }
 
-    Ok(())
+    Ok(Hook::Absolute {
+        gateway: gateway as _,
+        p_target: p_src as _,
+        stolen_size,
+    })
 }

@@ -2,6 +2,8 @@
 pub enum SunshineError {
     ProtectionError,
     AllocationFailed,
+    HookNotFound,
+    FreeFailed,
     TooFarAway,
 }
 

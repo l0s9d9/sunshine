@@ -1,4 +1,5 @@
-use std::mem::transmute;
+use std::{mem::transmute, sync::Mutex};
+use once_cell::sync::Lazy as SyncLazy;
 
 macro_rules! include_mods {
     ($($mod:ident),*) => {
@@ -28,6 +29,8 @@ pub mod jump;
 
 pub(crate) type Ptr<T = u8> = *mut T;
 
+pub(crate) static HOOKS: SyncLazy<Mutex<Vec<Hook>>> = SyncLazy::new(|| Mutex::new(Vec::with_capacity(8)));
+
 pub fn create_hook(
     hook_type: HookType,
     p_target: impl AnyFnPtr,
@@ -35,23 +38,30 @@ pub fn create_hook(
     pp_original: &mut Option<impl AnyFnPtr>,
 ) -> Result<()> 
 {
-    unsafe {
+    let hook = unsafe {
         match hook_type {
             HookType::Absolute => hook_absolute(
                 p_target.address() as _,
                 p_detour.address() as _,
                 transmute(pp_original)
-            ),
+            )?,
         }
-    }
+    };
+
+    HOOKS.lock().unwrap().push(hook);
+
+    Ok(())
 }
 
 // pub fn enable_hook(p_target: impl AnyFnPtr) -> Result<()> {
 //     todo!()
 // }
 
-pub fn remove_hook(_p_target: impl AnyFnPtr) -> Result<()> {
-    todo!()
+pub fn remove_hook(p_target: impl AnyFnPtr) -> Result<()> {
+    let mut lock = HOOKS.lock().unwrap();
+    let i = lock.iter().position(|hk| hk.address() == p_target.address()).ok_or(SunshineError::HookNotFound)?;
+    unsafe { lock.remove(i).remove()?; }
+    Ok(())
 }
 
 // pub fn disable_hook(p_target: impl AnyFnPtr) -> Result<()> {

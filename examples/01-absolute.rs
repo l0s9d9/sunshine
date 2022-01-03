@@ -30,5 +30,7 @@ fn main() {
             &mut ORIGINAL
         );
         target(1, 5);
+        sunshine::remove_hook(target as Func);
+        target(10, 15);
     }
 }
