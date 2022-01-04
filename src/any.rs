@@ -28,6 +28,18 @@ macro_rules! impl_any_fn_ptr {
             }
         }
 
+        unsafe impl <$($gen),*, R> AnyFnPtr for extern "stdcall" fn($($gen),*) -> R {
+            fn address(self) -> usize {
+                self as _
+            }
+        }
+
+        unsafe impl <$($gen),*, R> AnyFnPtr for unsafe extern "stdcall" fn($($gen),*) -> R {
+            fn address(self) -> usize {
+                self as _
+            }
+        }
+
         unsafe impl <$($gen),*, R> AnyFnPtr for extern "system" fn($($gen),*) -> R {
             fn address(self) -> usize {
                 self as _
