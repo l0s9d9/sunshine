@@ -18,7 +18,7 @@ impl Jump for AbsoluteJump {
         )?;
 
         if crate::IS_X64 {
-            b"\x49\xBF\x00\x00\x00\x00\x00\x00\x00\x00\x41\x57\xC3"
+            b"\x48\xB8\x00\x00\x00\x00\x00\x00\x00\x00\x50\xC3"
                 .as_ptr()
                 .copy_to_nonoverlapping(head, Self::SIZE);
 

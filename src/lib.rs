@@ -16,7 +16,7 @@ include_mods!(guard, any, error, hooks, gateway);
 cfg_if::cfg_if! {
     if #[cfg(target_pointer_width = "64")] {
         const IS_X64: bool = true;
-        const ABSOLUTE_JUMP_SIZE: usize = 13;
+        const ABSOLUTE_JUMP_SIZE: usize = 12;
         const BITNESS: u32 = 64;
     } else {
         const IS_X64: bool = false;
