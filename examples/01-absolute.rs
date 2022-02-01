@@ -1,5 +1,3 @@
-#![feature(naked_functions)]
-
 use sunshine::HookType;
 
 static mut ORIGINAL: Option<unsafe extern "system" fn(i32, i32) -> f64> = None;
