@@ -3,6 +3,8 @@ name = "sunshine"
 version = "0.1.0"
 edition = "2021"
 authors = ["sy1ntexx"]
+license = "MIT"
+repository = "https://github.com/sy1ntexx/sunshine"
 description = "Hooking library for x86/x64"
 
 [dependencies]
