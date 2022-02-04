@@ -1,5 +1,5 @@
 use crate::{Ptr, Hook, hook_absolute, SunshineError, ABSOLUTE_JUMP_SIZE, create_gateway, jump::{RelativeJump, Jump, AbsoluteJump}, ProtectionGuard};
-use radon::{internal::virtual_query, types::protection_flags::PAGE_EXECUTE_READWRITE};
+use faithe::{internal::virtual_query, types::protection_flags::PAGE_EXECUTE_READWRITE};
 use iced_x86::Decoder;
 
 pub(crate) unsafe fn hook_compact(p_src: Ptr, p_dst: Ptr, pp_original: Ptr<Ptr>) -> crate::Result<Hook> {

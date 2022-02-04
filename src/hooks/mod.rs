@@ -1,4 +1,4 @@
-use radon::{types::{protection_flags::PAGE_EXECUTE_READWRITE, free_types::MEM_RELEASE}, internal::virtual_free};
+use faithe::{types::{protection_flags::PAGE_EXECUTE_READWRITE, free_types::MEM_RELEASE}, internal::virtual_free};
 use crate::{Ptr, ProtectionGuard, SunshineError, ABSOLUTE_JUMP_SIZE};
 
 mod absolute;

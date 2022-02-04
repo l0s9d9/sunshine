@@ -1,4 +1,4 @@
-use radon::types::protection_flags::PAGE_EXECUTE_READWRITE;
+use faithe::types::protection_flags::PAGE_EXECUTE_READWRITE;
 use crate::{Ptr, ProtectionGuard};
 use super::Jump;
 
